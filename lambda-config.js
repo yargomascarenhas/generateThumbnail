@@ -8,7 +8,7 @@ module.exports = {
   description: 'image compressor and resizer',
   role: 'arn:aws:iam::149629872333:role/service-role/S3Thumbs-role-lycuue74',
   functionName: 'S3Thumbs',
-  timeout: 3,
+  timeout: 9,
   memorySize: 256,
   runtime: 'nodejs14.0'
 };
