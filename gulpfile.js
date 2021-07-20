@@ -1,5 +1,4 @@
 'use strict';
-require('dotenv').config();
 var gulp = require('gulp');
 var zip = require('gulp-zip');
 var del = require('del');
