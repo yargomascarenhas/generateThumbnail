@@ -6,7 +6,6 @@ exports.handler = async (event, context, cb) => {
   const validExtensions = ['jpg', 'jpeg', 'png'];
 
   const { bucket, object } = event.Records[0].s3;
-  console.log(bucket, object);
 
   // Where optimized images will be saved
   const dest = 'thumbs/';
@@ -21,11 +20,6 @@ exports.handler = async (event, context, cb) => {
     return cb(null, `Image not processed due to .${fileExt} file extension`);
   }
 
-  console.log({
-    Bucket: bucket.name,
-    Key: object.key
-  });
-
   // Download image from S3
   const s3Image = await s3.
     getObject({
@@ -33,7 +27,6 @@ exports.handler = async (event, context, cb) => {
       Key: object.key
     })
     .promise();
-  console.log('s3Image', s3Image);
 
   function gmToBuffer(data) {
     return new Promise((resolve, reject) => {
@@ -74,6 +67,5 @@ exports.handler = async (event, context, cb) => {
   });
 
   var results = await Promise.all(uploadPromises);
-  console.log('RESULTS', results);
   cb(null, 'finished');
 };
