@@ -67,5 +67,6 @@ exports.handler = async (event, context, cb) => {
   });
 
   var results = await Promise.all(uploadPromises);
+  console.log('RESULTS', results);
   cb(null, 'finished');
 };
