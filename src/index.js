@@ -1,5 +1,6 @@
 const gm = require('gm').subClass({ imageMagick: false });
 const AWS = require('aws-sdk');
+const Api = require('./api');
 const s3 = new AWS.S3();
 
 exports.handler = async (event, context, cb) => {
@@ -68,5 +69,17 @@ exports.handler = async (event, context, cb) => {
 
   var results = await Promise.all(uploadPromises);
   console.log('RESULTS', results);
+
+  var ret = await Api.get(process.env.FABCRIA_URL, '/scripts/filecompressed/' + fileName + '-' + fileExt);
+  if(typeof ret == 'string') {
+      ret = JSON.parse(ret);
+  }
+  console.log('fabcria/scripts/filecompressed returns', ret, typeof ret);
+  if(ret.code && ret.code == 200) {
+    resolve(true);
+  } else {
+    resolve(ret);
+  }
+
   cb(null, 'finished');
 };

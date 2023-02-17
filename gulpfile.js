@@ -20,7 +20,7 @@ gulp.task('js', function () {
 });
 
 gulp.task('env', function () {
-  return gulp.src('.env')
+  return gulp.src('./src/api.js')
     .pipe(gulp.dest('build/'));
 });
 
