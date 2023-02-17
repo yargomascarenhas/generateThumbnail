@@ -75,11 +75,6 @@ exports.handler = async (event, context, cb) => {
       ret = JSON.parse(ret);
   }
   console.log('fabcria/scripts/filecompressed returns', ret, typeof ret);
-  if(ret.code && ret.code == 200) {
-    resolve(true);
-  } else {
-    resolve(ret);
-  }
 
   cb(null, 'finished');
 };
